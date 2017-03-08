@@ -5,10 +5,9 @@
  */
 package Primitiva.Servlets;
 
-import Primitiva.modelo.Boleto;
+import com.mysql.jdbc.StringUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Pineapple
  */
-public class GeneradasTexto extends HttpServlet {
+public class Grafico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,22 +32,20 @@ public class GeneradasTexto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-       String boletos = request.getParameter("boletos");
-       int[] Apuestas = new int[10];
-       Boleto[] boleto = new Boleto[10];
-       int total=0;
-       for(int i=0;i<Integer.parseInt(boletos);i++)
-       {
-           Apuestas[i]=Integer.parseInt(request.getParameter("boleto"+i));
-           boleto[i]= new Boleto(i+1,Apuestas[i]);
-           request.setAttribute("boleto"+i,boleto[i].toString());
-           total+=boleto[i].getImporte();
-       }
-       request.setAttribute("numboletos",boletos);
-       request.setAttribute("total",total);
-       RequestDispatcher dispatcher=request.getRequestDispatcher("/GeneradasTexto.jsp");
-       dispatcher.forward(request, response);
+               String boletos = request.getParameter("boletos");
+        if(boletos!=null)
+        {
+            if(StringUtils.isStrictlyNumeric(boletos) && Integer.parseInt(boletos)<10){
+                int x = Integer.parseInt(boletos);
+                request.setAttribute("Boletos", x);
+                RequestDispatcher dispatcher=request.getRequestDispatcher("/ApuestaGrafico.jsp");
+                dispatcher.forward(request, response);
+                //response.sendRedirect("ApuestaTexto.jsp?b="+boletos);
+            }
+            else{
+            response.sendRedirect("BoletosGrafico.jsp?e=1");
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

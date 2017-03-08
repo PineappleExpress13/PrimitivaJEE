@@ -12,6 +12,14 @@
         <servlet-name>GeneradasTexto</servlet-name>
         <servlet-class>Primitiva.Servlets.GeneradasTexto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Grafico</servlet-name>
+        <servlet-class>Primitiva.Servlets.Grafico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GeneradasGrafico</servlet-name>
+        <servlet-class>Primitiva.Servlets.GeneradasGrafico</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Index</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>GeneradasTexto</servlet-name>
         <url-pattern>/GeneradasTexto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Grafico</servlet-name>
+        <url-pattern>/Grafico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeneradasGrafico</servlet-name>
+        <url-pattern>/GeneradasGrafico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

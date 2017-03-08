@@ -47,7 +47,6 @@ public class Texto extends HttpServlet {
             response.sendRedirect("BoletosTexto.jsp?e=1");
             }
         }
-        Boleto boleto = new Boleto(1,3);
  
     }
 

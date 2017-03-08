@@ -8,7 +8,6 @@ package Primitiva.Servlets;
 import Primitiva.modelo.Boleto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Pineapple
  */
-public class GeneradasTexto extends HttpServlet {
+public class GeneradasGrafico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,22 +32,33 @@ public class GeneradasTexto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-       String boletos = request.getParameter("boletos");
+        String boletos = request.getParameter("boletos");
        int[] Apuestas = new int[10];
        Boleto[] boleto = new Boleto[10];
        int total=0;
+       /*Recojo el nº de apuestas de cada boleto y creo el objeto*/
        for(int i=0;i<Integer.parseInt(boletos);i++)
        {
            Apuestas[i]=Integer.parseInt(request.getParameter("boleto"+i));
            boleto[i]= new Boleto(i+1,Apuestas[i]);
-           request.setAttribute("boleto"+i,boleto[i].toString());
-           total+=boleto[i].getImporte();
+           String[] auxiliar = boleto[i].getApuestas();
+           /*En función del nº de apuestas creo los atributos con los numeros*/
+           //for(int j=0;j<Apuestas[i];j++){
+              /* String[] parts = auxiliar[j].split(",");
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num1",parts[0]);
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num2",parts[0]);
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num3",parts[0]);
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num4",parts[0]);
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num5",parts[0]);
+               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num6",parts[0]);*/
+              
+           //}
        }
        request.setAttribute("numboletos",boletos);
        request.setAttribute("total",total);
-       RequestDispatcher dispatcher=request.getRequestDispatcher("/GeneradasTexto.jsp");
+       RequestDispatcher dispatcher=request.getRequestDispatcher("/GeneradasGrafico.jsp");
        dispatcher.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
