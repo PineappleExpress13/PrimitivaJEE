@@ -35,7 +35,7 @@ public class Grafico extends HttpServlet {
                String boletos = request.getParameter("boletos");
         if(boletos!=null)
         {
-            if(StringUtils.isStrictlyNumeric(boletos) && Integer.parseInt(boletos)<10){
+            if(StringUtils.isStrictlyNumeric(boletos) && Integer.parseInt(boletos)<10 && Integer.parseInt(boletos)>0){
                 int x = Integer.parseInt(boletos);
                 request.setAttribute("Boletos", x);
                 RequestDispatcher dispatcher=request.getRequestDispatcher("/ApuestaGrafico.jsp");

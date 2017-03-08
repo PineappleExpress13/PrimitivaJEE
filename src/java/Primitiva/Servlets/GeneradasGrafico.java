@@ -42,17 +42,14 @@ public class GeneradasGrafico extends HttpServlet {
            Apuestas[i]=Integer.parseInt(request.getParameter("boleto"+i));
            boleto[i]= new Boleto(i+1,Apuestas[i]);
            String[] auxiliar = boleto[i].getApuestas();
+           request.setAttribute("Boleto"+i+"Reintegro",boleto[i].getReintegro());
+           request.setAttribute("Boleto"+i+"Importe",boleto[i].getImporte());
+           request.setAttribute("Boleto"+i+"NumApuestas",Apuestas[i]);
+           total+=boleto[i].getImporte();
            /*En función del nº de apuestas creo los atributos con los numeros*/
-           //for(int j=0;j<Apuestas[i];j++){
-              /* String[] parts = auxiliar[j].split(",");
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num1",parts[0]);
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num2",parts[0]);
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num3",parts[0]);
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num4",parts[0]);
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num5",parts[0]);
-               request.setAttribute("Boleto"+i+"Apuesta"+j+"Num6",parts[0]);*/
-              
-           //}
+           for(int j=0;j<Apuestas[i];j++){
+            request.setAttribute("Boleto"+i+"Apuesta"+j,auxiliar[j]);
+           }
        }
        request.setAttribute("numboletos",boletos);
        request.setAttribute("total",total);
